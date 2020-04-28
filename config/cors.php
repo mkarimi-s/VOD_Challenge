@@ -11,11 +11,12 @@ return [
      |
      */
 
-    'supportsCredentials' => true,
+    'supportsCredentials' => false,
     'allowedOrigins' => env('CORS_ALLOWED_ORIGINS') ? explode(',', env('CORS_ALLOWED_ORIGINS')) : ['*'],
     'allowedHeaders' => ['Content-Type', 'X-Requested-With', 'Authorization'],
     'allowedMethods' => ['*'],
-    'exposedHeaders' => [],
+    'exposedHeaders' => ['*'],
     'maxAge' => 864000,
+    'path' => ['api/*']
 ];
 
