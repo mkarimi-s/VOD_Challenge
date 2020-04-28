@@ -10,6 +10,8 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 .env
+composer.lock
+composer.phar
 
 # Ignore ide helper files
 _ide_helper.php
