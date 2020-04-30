@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Jobs\AddCreditToUserForSignUp;
 use Auth;
 use App\User;
 use App\Http\Requests\Api\LoginUser;
@@ -51,6 +52,8 @@ class AuthController extends ApiController
             'email' => $request->input('user.email'),
             'password' => $request->input('user.password'),
         ]);
+
+        $this->dispatch(new AddCreditToUserForSignUp($user));
 
         return $this->respondWithTransformer($user);
     }

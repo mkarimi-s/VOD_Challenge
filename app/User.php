@@ -7,10 +7,11 @@ use App\RealWorld\Follow\Followable;
 use App\RealWorld\Favorite\HasFavorite;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\RealWorld\Billable\Billable;
 
 class User extends Authenticatable
 {
-    use Notifiable, Followable, HasFavorite;
+    use Notifiable, Followable, HasFavorite, Billable;
 
     /**
      * The attributes that are mass assignable.

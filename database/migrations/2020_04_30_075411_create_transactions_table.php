@@ -13,11 +13,16 @@ final class CreateTransactionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users');
             $table->bigInteger('amount');
+            $table->string('description')->nullable();
+            $table->string('transactionable_type')->nullable();
+            $table->uuid('transactionable_id')->nullable();
             $table->timestamps();
         });
     }
