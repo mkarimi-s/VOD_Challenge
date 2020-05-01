@@ -15,6 +15,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\ArticleCreated' => [
             'App\Listeners\DecreaseCreditAfterStoringArticle',
         ],
+        'App\Event\CommentCreated' => [
+            'App\Listeners\DecreaseCreditAfterStoringComment',
+        ]
     ];
 
     /**

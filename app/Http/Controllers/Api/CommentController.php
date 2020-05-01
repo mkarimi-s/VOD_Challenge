@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Article;
 use App\Comment;
+use App\Event\CommentCreated;
 use App\Http\Requests\Api\CreateComment;
 use App\Http\Requests\Api\DeleteComment;
 use App\RealWorld\Transformers\CommentTransformer;
+use Auth;
 
 class CommentController extends ApiController
 {
@@ -49,6 +51,10 @@ class CommentController extends ApiController
             'body' => $request->input('comment.body'),
             'user_id' => auth()->id(),
         ]);
+
+        if(Auth::user()->comments()->count() > config('credits.number_of_free_comment')) {
+            event( new CommentCreated($comment));
+        }
 
         return $this->respondWithTransformer($comment);
     }
