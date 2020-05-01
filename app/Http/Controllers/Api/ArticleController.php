@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\ArticleCreated;
 use App\Tag;
 use App\Article;
 use App\RealWorld\Paginate\Paginate;
@@ -54,6 +55,8 @@ class ArticleController extends ApiController
             'description' => $request->input('article.description'),
             'body' => $request->input('article.body'),
         ]);
+
+        event(new ArticleCreated($article));
 
         $inputTags = $request->input('article.tagList');
 

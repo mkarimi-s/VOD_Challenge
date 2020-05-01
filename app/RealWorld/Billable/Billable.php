@@ -39,11 +39,11 @@ trait Billable
     }
 
     /**
-     * @return HasMany
+     * @return HasOne
      */
     public function transactionsBalances()
     {
-        return $this->hasMany(TransactionBalance::class);
+        return $this->hasOne(TransactionBalance::class);
     }
 
     /**
