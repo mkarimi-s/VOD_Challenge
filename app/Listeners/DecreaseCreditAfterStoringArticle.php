@@ -4,10 +4,13 @@ namespace App\Listeners;
 
 use App\Article;
 use App\Events\ArticleCreated;
+use App\RealWorld\CreditThreshold\CreditThreshold;
 use DB;
 
 class DecreaseCreditAfterStoringArticle
 {
+    use CreditThreshold;
+
     /**
      * Create the event listener.
      *
@@ -33,5 +36,7 @@ class DecreaseCreditAfterStoringArticle
                 'description' => config('credits.article_register_description')
             ]);
         });
+
+        $this->checkUserCreditThreshold($event->article->user);
     }
 }

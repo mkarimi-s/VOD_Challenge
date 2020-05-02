@@ -4,10 +4,14 @@ namespace App\Listeners;
 
 use App\Comment;
 use App\Event\CommentCreated;
+use App\RealWorld\CreditThreshold\CreditThreshold;
 use DB;
+use Notification;
+use Log;
 
 class DecreaseCreditAfterStoringComment
 {
+    use CreditThreshold;
     /**
      * Create the event listener.
      *
@@ -33,5 +37,7 @@ class DecreaseCreditAfterStoringComment
                 'description' => config('credits.comment_register_description')
             ]);
         });
+
+        $this->checkUserCreditThreshold($event->comment->user);
     }
 }
