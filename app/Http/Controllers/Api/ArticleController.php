@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Comment;
 use App\Events\ArticleCreated;
 use App\Tag;
 use App\Article;
@@ -49,6 +50,7 @@ class ArticleController extends ApiController
     public function store(CreateArticle $request)
     {
         $user = auth()->user();
+        $this->authorize('create', Article::class);
 
         $article = $user->articles()->create([
             'title' => $request->input('article.title'),

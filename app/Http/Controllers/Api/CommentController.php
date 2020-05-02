@@ -47,6 +47,7 @@ class CommentController extends ApiController
      */
     public function store(CreateComment $request, Article $article)
     {
+        $this->authorize('create', Comment::class);
         $comment = $article->comments()->create([
             'body' => $request->input('comment.body'),
             'user_id' => auth()->id(),
