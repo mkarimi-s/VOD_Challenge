@@ -44,5 +44,6 @@ class AddCreditToUserForSignUp implements ShouldQueue
                 'description' => config('credits.sign_up_description')
             ]);
         });
+        Log::info(sprintf('adding %d credit to user with id %d', config('credits.sign_up_credit'), $this->_user->id));
     }
 }
