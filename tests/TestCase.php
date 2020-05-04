@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use App\Jobs\AddCreditToUserForSignUp;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
@@ -19,6 +20,10 @@ abstract class TestCase extends BaseTestCase
         parent::setUp();
 
         $users = factory(\App\User::class)->times(2)->create();
+
+        foreach($users as $user) {
+            dispatch(new AddCreditToUserForSignUp($user));
+        }
 
         $this->loggedInUser = $users[0];
 

@@ -28,6 +28,6 @@ class CommentPolicy
      */
     public function create(User $user)
     {
-        return $user->transactionsBalance->balance > 0 ;
+        return !empty($user->transactionsBalance->balance) && $user->transactionsBalance->balance > 0 ;
     }
 }
